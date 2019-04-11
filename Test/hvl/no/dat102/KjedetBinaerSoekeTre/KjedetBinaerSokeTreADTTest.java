@@ -1,13 +1,18 @@
-package hvl.no.dat102.Test;
+package hvl.no.dat102.KjedetBinaerSoekeTre;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.Assert;
+import org.junit.jupiter.api.Test;
+
 import static org.junit.Assert.*;
 
-import org.junit.Test;
 
 import org.junit.Before;
 
 public class KjedetBinaerSokeTreADTTest {   
 
-    private KjedetBinaerSokeTre<Integer> bs;  
+    
     // Testdata som legges inn i treet
     private Integer e0 = 1;
     private Integer e1 = 2;
@@ -19,7 +24,8 @@ public class KjedetBinaerSokeTreADTTest {
     
     //Data som ikke legges inn i treet
     private Integer e7 = 8;
-
+    
+    private KjedetBinaerSokeTre<Integer> bs;  
     /**
      * Opprett en tomt tre for hver test.
      * 
@@ -39,8 +45,18 @@ public class KjedetBinaerSokeTreADTTest {
     /* Her legger du inn e0...e6 i treet i en vilkårlig rekkefølge.
      * Etterpå sjekker du om elementene fins og til slutt sjekker du
      * at e7 ikke fins
-     */     
-                       
+     */   
+    	bs.leggTil(e0);
+    	bs.leggTil(e5);
+    	bs.leggTil(e3);
+    	bs.leggTil(e6);
+    	bs.leggTil(e2);
+    	bs.leggTil(e1);
+    	bs.leggTil(e4);
+    	
+    	Assert.assertTrue(bs.finn(e1).equals(0));
+    	Assert.assertTrue(bs.finn(e5).equals(4));
+    	Assert.assertFalse(bs.finn(e7).equals(null));
    }
         
     /**
@@ -50,7 +66,25 @@ public class KjedetBinaerSokeTreADTTest {
      @Test
     public final void erBSTreOrdnet() { 
      /* Her legge du først inn e0...e6 i en vilkårlig rekkefølge
-      * og så fjerne du minste hele tiden               
+      * og så fjerne du minste hele tiden    */
+    	bs.leggTil(e0);
+     	bs.leggTil(e5);
+     	bs.leggTil(e3);
+     	bs.leggTil(e6);
+     	bs.leggTil(e2);
+     	bs.leggTil(e1);
+     	bs.leggTil(e4);
+     	
+     	bs.fjernMin();
+     	bs.fjernMin();
+     	bs.fjernMin();
+     	bs.fjernMin();
+     	bs.fjernMin();
+     	bs.fjernMin();
+     	bs.fjernMin();
+     	
+     	//eller sjekke om den som er minst er den som forsvinner?????
+     	Assert.assertTrue(bs.erTom());
    }
      
     /**
@@ -70,7 +104,7 @@ public class KjedetBinaerSokeTreADTTest {
      Integer el[] = {e0, e1, e2, e3, e4, e5, e6};
      int i = 0;
      for (Integer e : bs ) {
-       assertEquals(el[i], e);
+       Assert.assertEquals(el[i], e);
        i++;
      }
               
